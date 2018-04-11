@@ -5,15 +5,21 @@ package com.deilsky.network;
  */
 
 public class RoContract {
-    public static String SERVICE;
-    public static String SOURCES;
-    public static boolean PRINT = true;
-    public static RoContract instance = new RoContract();
+    static String SERVICE;
+    static String SOURCES;
+    static boolean PRINT = true;
+    static Contract.ErrorMessage ERRORMESSAGE = Contract.ErrorMessage.SIMPLE;
+    private static RoContract instance = new RoContract();
+    static final String TAG = "DEILSKY RONETWORK";
 
-    public static RoContract create() {
-        instance = new RoContract();
-        return instance;
-    }
+    static final String BASE = "【 DEILSKY RONETWORK START 】" + "\n" +
+            "【 url : %1$s 】" + "\n" +
+            "【 port : %2$s 】" + "\n" +
+            "【 method : %3$s 】" + "\n" +
+            "【 code : %5$d 】" + "\n" +
+            "【 success : %4$s 】" + "\n";
+    static final String PARAMTER = "【 %1$s : %2$s 】";
+    static final String END = "【 DEILSKY RONETWORK END 】";
 
     private RoContract() {
     }
@@ -22,11 +28,7 @@ public class RoContract {
         SERVICE = contract.service();
         SOURCES = contract.sources();
         PRINT = contract.print();
-        return instance;
-    }
-
-    public static RoContract printLog(boolean print) {
-        PRINT = print;
+        ERRORMESSAGE = contract.errorMessage();
         return instance;
     }
 }

@@ -9,6 +9,11 @@ public class Contract {
     private static String sources;
     private static boolean print = true;
     private static Contract contract = null;
+    private static ErrorMessage errorMessage = ErrorMessage.SIMPLE;
+
+    public enum ErrorMessage {
+        DETAILED, SIMPLE
+    }
 
     private Contract() {
     }
@@ -29,6 +34,13 @@ public class Contract {
         Contract.print = print;
     }
 
+    public Contract(String service, String sources, boolean print, ErrorMessage message) {
+        Contract.service = service;
+        Contract.sources = sources;
+        Contract.print = print;
+        Contract.errorMessage = message;
+    }
+
     public Contract service(String service) {
         Contract.service = service;
         return this;
@@ -44,6 +56,11 @@ public class Contract {
         return this;
     }
 
+    public Contract errorMessage(ErrorMessage message) {
+        Contract.errorMessage = message;
+        return this;
+    }
+
     String service() {
         return service;
     }
@@ -54,6 +71,10 @@ public class Contract {
 
     boolean print() {
         return print;
+    }
+
+    ErrorMessage errorMessage() {
+        return errorMessage;
     }
 
 }

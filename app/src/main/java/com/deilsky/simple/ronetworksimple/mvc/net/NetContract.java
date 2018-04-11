@@ -1,7 +1,5 @@
 package com.deilsky.simple.ronetworksimple.mvc.net;
 
-import com.deilsky.network.RoResult;
-import com.deilsky.network.listener.RoBaseListener;
 import com.deilsky.network.listener.RoResultListener;
 import com.deilsky.network.listener.RoUpLoadProgressListener;
 
@@ -21,6 +19,6 @@ public interface NetContract {
     }
 
     interface DownLoadContract {
-        void download(String path, RoBaseListener<ResponseBody> listener);
+        void download(String path, RoResultListener<ResponseBody> listener);
     }
 }

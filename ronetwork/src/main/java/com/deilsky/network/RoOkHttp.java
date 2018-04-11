@@ -47,35 +47,33 @@ public enum RoOkHttp {
                 if (RoContract.PRINT) {
                     HttpUrl url = request.url();
                     String method = request.method();
-                    String info = String.format(BASE.toString(), url, url.port(), method, response.isSuccessful(), response.code());
-                    Log.d(TAG, info);
+                    String info = String.format(RoContract.BASE.toString(), url, url.port(), method, response.isSuccessful(), response.code());
+                    Log.d(RoContract.TAG, info);
                     if (TextUtils.equals("GET", method)) {
-                        Log.d(TAG, String.format(PARAMTER.toString(), "paramer.size", String.valueOf(url.querySize())));
-                        Log.d(TAG, String.format(PARAMTER.toString(), "name", "value"));
+                        Log.d(RoContract.TAG, String.format(RoContract.PARAMTER, "paramer.size", String.valueOf(url.querySize())));
+                        Log.d(RoContract.TAG, String.format(RoContract.PARAMTER, "name", "value"));
                         Set<String> set = url.queryParameterNames();
-                        Iterator<String> iterator = set.iterator();
-                        while (iterator.hasNext()) {
-                            String name = iterator.next();
+                        for (String name : set) {
                             String value = TextUtils.isEmpty(url.queryParameter(name)) ? "" : url.queryParameter(name);
-                            Log.d(TAG, String.format(PARAMTER.toString(), name, value));
+                            Log.d(RoContract.TAG, String.format(RoContract.PARAMTER, name, value));
                         }
-                        Log.d(TAG, END);
+                        Log.d(RoContract.TAG, RoContract.END);
                     } else if (TextUtils.equals("POST", method)) {
                         RequestBody requestBody = request.body();
-                        Log.d(TAG, String.format(PARAMTER.toString(), "contentType", requestBody.contentType()));
+                        Log.d(RoContract.TAG, String.format(RoContract.PARAMTER, "contentType", requestBody.contentType()));
                         if (requestBody instanceof FormBody) {
                             FormBody body = (FormBody) requestBody;
                             int size = body.size();
-                            Log.d(TAG, String.format(PARAMTER.toString(), "paramer.size", String.valueOf(size)));
+                            Log.d(RoContract.TAG, String.format(RoContract.PARAMTER, "paramer.size", String.valueOf(size)));
                             for (int i = 0; i < size; i++) {
                                 String name = body.encodedName(i);
                                 String value = TextUtils.isEmpty(body.encodedValue(i)) ? "" : body.encodedValue(i);
-                                Log.d(TAG, String.format(PARAMTER.toString(), name, value));
+                                Log.d(RoContract.TAG, String.format(RoContract.PARAMTER, name, value));
                             }
-                        } else if (!(requestBody instanceof MultipartBody)){
+                        } else if (!(requestBody instanceof MultipartBody)) {
                             requestBody.writeTo(sink);
                         }
-                        Log.d(TAG, END);
+                        Log.d(RoContract.TAG, RoContract.END);
                     }
                 }
                 return response;
@@ -84,17 +82,6 @@ public enum RoOkHttp {
         this.instance = build.build();
     }
 
-    static final String TAG = "DEILSKY RONETWORK";
-    static final String END = "【 DEILSKY RONETWORK END 】";
-    static StringBuffer BASE = new StringBuffer()
-            .append("【 DEILSKY RONETWORK START 】").append("\n")
-            .append("【 url : %1$s 】").append("\n")
-            .append("【 port : %2$s 】").append("\n")
-            .append("【 method : %3$s 】").append("\n")
-            .append("【 code : %5$d 】").append("\n")
-            .append("【 success : %4$s 】").append("\n");
-    //.append("【 END 】");
-    static StringBuffer PARAMTER = new StringBuffer().append("【 %1$s : %2$s 】");
     private BufferedSink sink = new BufferedSink() {
         @Override
         public Buffer buffer() {
@@ -109,11 +96,10 @@ public enum RoOkHttp {
                 HashMap map = new Gson().fromJson(str, HashMap.class);
                 if (map != null && !map.isEmpty()) {
                     Set set = map.keySet();
-                    Iterator iterator = set.iterator();
-                    while (iterator.hasNext()) {
-                        String key = (String) iterator.next();
+                    for (Object aSet : set) {
+                        String key = (String) aSet;
                         String value = String.valueOf(map.get(key));
-                        Log.d(TAG, String.format(PARAMTER.toString(), key, value));
+                        Log.d(RoContract.TAG, String.format(RoContract.PARAMTER, key, value));
                     }
                 }
             }

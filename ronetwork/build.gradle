@@ -35,20 +35,20 @@ android {
             options {
                 encoding "UTF-8"
                 charSet 'UTF-8'
-                links "http://docs.oracle.com/javase/8/docs/api"
+                links "http://docs.oracle.com/javase/7/docs/api"
             }
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
     }
     publish {
         repoName = 'RoNetwork'//仓库名
         userOrg = 'deilsky'      //bintray注册的用户名
         groupId = 'com.deilsky'         //compile引用时的第1部分groupId
         artifactId = 'RoNetwork'     //compile引用时的第2部分项目名
-        publishVersion = '1.0.5'    //compile引用时的第3部分版本号
+        publishVersion = '1.0.6'    //compile引用时的第3部分版本号
         desc = 'RoNetwork'//d项目描述
         repoName = "RoNetwork" //你的仓库名称，没有填写默认仓库是maven//这也是很多人上传仓库不对名问题最多情况，
         website = 'https://github.com/deilsky/RoNetworkSimple' //github 托管地址

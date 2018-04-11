@@ -4,7 +4,7 @@ package com.deilsky.simple.ronetworksimple.mvc.net;
 import com.deilsky.network.RoResponse;
 import com.deilsky.network.RoResult;
 import com.deilsky.network.RoRetrofit;
-import com.deilsky.network.listener.RoBaseListener;
+import com.deilsky.network.listener.RoResultListener;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -29,7 +29,7 @@ public class DownLoadApi implements NetContract.DownLoadContract {
     }
 
     @Override
-    public void download(String path, final RoBaseListener<ResponseBody> listener) {
+    public void download(String path, final RoResultListener<ResponseBody> listener) {
         Call<RoResult<ResponseBody>> call = service.download(path);
         call.enqueue(new Callback<RoResult<ResponseBody>>() {
             @Override

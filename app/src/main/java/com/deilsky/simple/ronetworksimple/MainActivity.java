@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import com.deilsky.network.RoDownLoad;
 import com.deilsky.network.RoResult;
-import com.deilsky.network.listener.RoBaseListener;
 import com.deilsky.network.listener.RoDownLoadProgressListener;
 import com.deilsky.network.listener.RoResultListener;
 import com.deilsky.network.listener.RoUpLoadProgressListener;
@@ -151,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 DownLoadApi.create()
                         .download("resources/upload/header/e9c8c3f0/7b12/4750/8681/8794badc9407/20171129105444823.zip",
-                                new RoBaseListener<ResponseBody>() {
+                                new RoResultListener<ResponseBody>() {
                                     @Override
                                     public void onSuccess(RoResult<ResponseBody> result) {
                                         Log.d("download", result.toString());
