@@ -106,12 +106,12 @@ public enum RoOkHttp {
             if (byteString != null && !TextUtils.isEmpty(byteString.utf8())) {
                 String str = byteString.utf8();
                 Log.d("byteString:", str);
-                HashMap<String, Object> map = new Gson().fromJson(str, HashMap.class);
+                HashMap map = new Gson().fromJson(str, HashMap.class);
                 if (map != null && !map.isEmpty()) {
-                    Set<String> set = map.keySet();
-                    Iterator<String> iterator = set.iterator();
+                    Set set = map.keySet();
+                    Iterator iterator = set.iterator();
                     while (iterator.hasNext()) {
-                        String key = iterator.next();
+                        String key = (String) iterator.next();
                         String value = String.valueOf(map.get(key));
                         Log.d(TAG, String.format(PARAMTER.toString(), key, value));
                     }
