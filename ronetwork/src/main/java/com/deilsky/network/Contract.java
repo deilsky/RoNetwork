@@ -19,40 +19,40 @@ public class Contract {
     }
 
     public Contract(String service, String sources) {
-        this.service = service;
-        this.sources = sources;
+        Contract.service = service;
+        Contract.sources = sources;
     }
 
     public Contract(String service, String sources, boolean print) {
-        this.service = service;
-        this.sources = sources;
-        this.print = print;
+        Contract.service = service;
+        Contract.sources = sources;
+        Contract.print = print;
     }
 
     public Contract service(String service) {
-        this.service = service;
+        Contract.service = service;
         return this;
     }
 
     public Contract sources(String sources) {
-        this.sources = sources;
+        Contract.sources = sources;
         return this;
     }
 
     public Contract print(boolean print) {
-        this.print = print;
+        Contract.print = print;
         return this;
     }
 
-    public String service() {
+    String service() {
         return service;
     }
 
-    public String sources() {
+    String sources() {
         return sources;
     }
 
-    public boolean print() {
+    boolean print() {
         return print;
     }
 

@@ -29,16 +29,10 @@ public class App extends Application {
         super.onCreate();
         instance = this;
         appContext = this;
-        //331a3b67df15f476e8a0b41e00765ef2
-        //http://125.211.222.141:9006/api/
-        /*Contract contract = Contract.create().
-                service("http://10.242.193.17:8000/api/").sources("http://10.242.193.17:8000/").print(true);*/
+
         Contract contract = Contract.create().
-                service("http://125.211.222.141:9006/api/").sources("http://125.211.222.141:9006/").print(true);
-        /*Contract contract = Contract.create().
-                service("http://192.168.1.129/api/").sources("http://192.168.1.129/").print(true);*/
+                service("http://xxx.xxx.xxx.xxx:xxxx/api/").sources("http://xxx.xxx.xxx.xxx:xxxx/").print(true);
         RoContract.create(contract);
-        //Logger.addLogAdapter(new AndroidLogAdapter());
 
 
     }
