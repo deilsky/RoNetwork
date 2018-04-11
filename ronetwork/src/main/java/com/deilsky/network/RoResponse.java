@@ -1,7 +1,7 @@
 package com.deilsky.network;
 
-import com.deilsky.network.listener.RoCallBack;
-import com.deilsky.network.listener.RoResultCallBack;
+import com.deilsky.network.listener.RoBaseListener;
+import com.deilsky.network.listener.RoResultListener;
 
 import retrofit2.Response;
 
@@ -12,15 +12,16 @@ import retrofit2.Response;
 
 public class RoResponse<T> {
 
-    public void formatter(Response<T> response, RoCallBack<T> listener) {
+    public void formatter(Response<RoResult<T>> response,RoBaseListener<T> listener) {
         if (response.isSuccessful() && 200 == response.code()) {
             listener.onSuccess(response.body());
         } else {
             listener.onError(response.code() + ":" + response.message());
         }
     }
-    public void formatter(Response<RoResult<T>> response, RoResultCallBack<T> listener) {
-        if (response.isSuccessful() && 200 == response.code()) {
+
+    public void formatter(Response<RoResult<T>> response, RoResultListener<T> listener) {
+        if (response.isSuccessful()) {
             listener.onSuccess(response.body());
         } else {
             listener.onError(response.code() + ":" + response.message());

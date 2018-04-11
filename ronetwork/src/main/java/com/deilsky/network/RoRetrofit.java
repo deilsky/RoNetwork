@@ -15,7 +15,7 @@ public class RoRetrofit {
         Retrofit retrofit = builder.build();
         return retrofit;
     }
-    public static Retrofit getSourceInstance() {
+    public static Retrofit getOtherInstance() {
         Retrofit.Builder builder = new Retrofit.Builder();
         builder.baseUrl(RoContract.SOURCES);
         builder.addConverterFactory(GsonConverterFactory.create())

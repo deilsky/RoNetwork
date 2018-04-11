@@ -1,74 +1,65 @@
 package com.deilsky.simple.ronetworksimple.mvc.model;
 
 /**
- * Created by shui_ on 2018/1/6.
+ * Created by 帷幕 on 2017/6/15.
  */
 
 public class User {
-    private String Username;
-    private int UserId;
-    private String Birthday;
-    private Integer CompanyId;
-    private String CompanyName;
-    private String DeviceId;
+    private int CustomerId;
+    private boolean IsHero;
+    private String Avatar;
     private String Name;
-    private String Password;
-    private String sex;
-    private Integer StationId;
-    private String StationName;
-    private boolean NeedLocaltion;
+    private String Phone;
+    private String CenterUser;
+    private String CenterPwd;
+    private boolean IsReqhero;
+    private String LinkName;
+    private String LinkPhone;
+    private double Amount;
+    private double Point;
+    private boolean Offline;
 
-    public User(String Username, String Password) {
-        this.Username = Username;
-        this.Password = Password;
+    @Override
+    public String toString() {
+        return "User{" +
+                "CustomerId=" + CustomerId +
+                ", IsHero=" + IsHero +
+                ", Avatar='" + Avatar + '\'' +
+                ", Name='" + Name + '\'' +
+                ", Phone='" + Phone + '\'' +
+                ", CenterUser='" + CenterUser + '\'' +
+                ", CenterPwd='" + CenterPwd + '\'' +
+                ", IsReqhero=" + IsReqhero +
+                ", LinkName='" + LinkName + '\'' +
+                ", LinkPhone='" + LinkPhone + '\'' +
+                ", Amount=" + Amount +
+                ", Point=" + Point +
+                ", Offline=" + Offline +
+                '}';
     }
 
-    public String getUsername() {
-        return Username;
+    public int getCustomerId() {
+        return CustomerId;
     }
 
-    public void setUsername(String username) {
-        Username = username;
+    public void setCustomerId(int customerId) {
+        CustomerId = customerId;
     }
 
-    public int getUserId() {
-        return UserId;
+    public boolean isHero() {
+        return IsHero;
     }
 
-    public void setUserId(int userId) {
-        UserId = userId;
+    public void setHero(boolean hero) {
+        IsHero = hero;
     }
 
-    public String getBirthday() {
-        return Birthday;
+    public String getAvatar() {
+        return Avatar;
     }
 
-    public void setBirthday(String birthday) {
-        Birthday = birthday;
-    }
-
-    public Integer getCompanyId() {
-        return CompanyId;
-    }
-
-    public void setCompanyId(Integer companyId) {
-        CompanyId = companyId;
-    }
-
-    public String getCompanyName() {
-        return CompanyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        CompanyName = companyName;
-    }
-
-    public String getDeviceId() {
-        return DeviceId;
-    }
-
-    public void setDeviceId(String deviceId) {
-        DeviceId = deviceId;
+    public void setAvatar(String avatar) {
+        Avatar = avatar;
     }
 
     public String getName() {
@@ -79,61 +70,75 @@ public class User {
         Name = name;
     }
 
-    public String getPassword() {
-        return Password;
+    public String getPhone() {
+        return Phone;
     }
 
-    public void setPassword(String password) {
-        Password = password;
+    public void setPhone(String phone) {
+        Phone = phone;
     }
 
-    public String getSex() {
-        return sex;
+    public String getCenterUser() {
+        return CenterUser;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setCenterUser(String centerUser) {
+        CenterUser = centerUser;
     }
 
-    public Integer getStationId() {
-        return StationId;
+    public String getCenterPwd() {
+        return CenterPwd;
     }
 
-    public void setStationId(Integer stationId) {
-        StationId = stationId;
+    public void setCenterPwd(String centerPwd) {
+        CenterPwd = centerPwd;
     }
 
-    public String getStationName() {
-        return StationName;
+    public boolean isReqhero() {
+        return IsReqhero;
     }
 
-    public void setStationName(String stationName) {
-        StationName = stationName;
+    public void setReqhero(boolean reqhero) {
+        IsReqhero = reqhero;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "Username='" + Username + '\'' +
-                ", UserId=" + UserId +
-                ", Birthday='" + Birthday + '\'' +
-                ", CompanyId=" + CompanyId +
-                ", CompanyName='" + CompanyName + '\'' +
-                ", DeviceId='" + DeviceId + '\'' +
-                ", Name='" + Name + '\'' +
-                ", Password='" + Password + '\'' +
-                ", sex='" + sex + '\'' +
-                ", StationId=" + StationId +
-                ", StationName='" + StationName + '\'' +
-                ", NeedLocaltion=" + NeedLocaltion +
-                '}';
+    public String getLinkName() {
+        return LinkName;
     }
 
-    public boolean isNeedLocaltion() {
-        return NeedLocaltion;
+    public void setLinkName(String linkName) {
+        LinkName = linkName;
     }
 
-    public void setNeedLocaltion(boolean needLocaltion) {
-        NeedLocaltion = needLocaltion;
+    public String getLinkPhone() {
+        return LinkPhone;
+    }
+
+    public void setLinkPhone(String linkPhone) {
+        LinkPhone = linkPhone;
+    }
+
+    public double getAmount() {
+        return Amount;
+    }
+
+    public void setAmount(double amount) {
+        Amount = amount;
+    }
+
+    public double getPoint() {
+        return Point;
+    }
+
+    public void setPoint(double point) {
+        Point = point;
+    }
+
+    public boolean isOffline() {
+        return Offline;
+    }
+
+    public void setOffline(boolean offline) {
+        Offline = offline;
     }
 }

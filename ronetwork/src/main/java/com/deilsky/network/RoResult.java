@@ -5,51 +5,6 @@ import java.util.List;
 /**
  * Created by 帷幕 on 2017/10/9.
  */
-public class RoResult<T> {
-    private int status;
-    private String msg;
-    private T data;
-    private List<T> list;
+public class RoResult<T> extends RoBase<T> {
 
-    @Override
-    public String toString() {
-        return "RoResult{" +
-                "status=" + status +
-                ", msg='" + msg + '\'' +
-                ", data=" + data +
-                ", list=" + list +
-                '}';
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
-
-    public List<T> getList() {
-        return list;
-    }
-
-    public void setList(List<T> list) {
-        this.list = list;
-    }
 }
