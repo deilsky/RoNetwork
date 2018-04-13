@@ -48,7 +48,7 @@ android {
         userOrg = 'deilsky'      //bintray注册的用户名
         groupId = 'com.deilsky'         //compile引用时的第1部分groupId
         artifactId = 'RoNetwork'     //compile引用时的第2部分项目名
-        publishVersion = '1.0.6'    //compile引用时的第3部分版本号
+        publishVersion = '1.0.7'    //compile引用时的第3部分版本号
         desc = 'RoNetwork'//d项目描述
         repoName = "RoNetwork" //你的仓库名称，没有填写默认仓库是maven//这也是很多人上传仓库不对名问题最多情况，
         website = 'https://github.com/deilsky/RoNetworkSimple' //github 托管地址
@@ -64,5 +64,5 @@ dependencies {
     provided 'com.squareup.okio:okio:1.12.0'
     provided 'com.google.code.gson:gson:2.8.0'
     provided 'com.squareup.retrofit2:converter-gson:2.2.0'
-    testImplementation 'junit:junit:4.12'
+    testProvided 'junit:junit:4.12'
 }
