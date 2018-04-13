@@ -8,7 +8,6 @@ public class RoContract {
     static String SERVICE;
     static String SOURCES;
     static boolean PRINT = true;
-    static Contract.ErrorMessage ERRORMESSAGE = Contract.ErrorMessage.SIMPLE;
     private static RoContract instance = new RoContract();
     static final String TAG = "DEILSKY RONETWORK";
 
@@ -20,21 +19,14 @@ public class RoContract {
             "【 success : %4$s 】" + "\n";
     static final String PARAMTER = "【 %1$s : %2$s 】";
     static final String END = "【 DEILSKY RONETWORK END 】";
-    static final String THROWABLE_START = "【 DEILSKY RONETWORK ROTHROWABLE START 】";
-    static final String THROWABLE_END = "【 DEILSKY RONETWORK ROTHROWABLE END 】";
-    static final String THROWABLE_INFO = "【 ClassName : %1$s 】" + "\n" +
-            "【 FileName : %2$s 】" + "\n" +
-            "【 MethodName : %3$s 】" + "\n" +
-            "【 LineNumber : %4$d 】" + "\n";
 
     private RoContract() {
     }
 
-    public static RoContract create(Contract contract) {
+    public static RoContract create(RoDefine contract) {
         SERVICE = contract.service();
         SOURCES = contract.sources();
         PRINT = contract.print();
-        ERRORMESSAGE = contract.errorMessage();
         return instance;
     }
 }

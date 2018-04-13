@@ -3,7 +3,7 @@ package com.deilsky.simple.ronetworksimple.base;
 import android.app.Application;
 import android.content.Context;
 
-import com.deilsky.network.Contract;
+import com.deilsky.network.RoDefine;
 import com.deilsky.network.RoContract;
 
 /**
@@ -30,10 +30,9 @@ public class App extends Application {
         instance = this;
         appContext = this;
 
-        Contract contract = Contract.create()
+        RoDefine contract = RoDefine.create()
                 .service("http://192.168.31.155:8080/taxis/api/")
                 .sources("http://192.168.31.155:8080/taxis/")
-                .errorMessage(Contract.ErrorMessage.DETAILED)
                 .print(true);
         RoContract.create(contract);
 
