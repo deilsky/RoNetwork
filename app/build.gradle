@@ -22,11 +22,11 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
     //provided implementation
-    provided 'com.squareup.retrofit2:retrofit:2.2.0'
-    provided 'com.squareup.okhttp3:okhttp:3.7.0'
-    provided 'com.squareup.okio:okio:1.12.0'
-    provided 'com.google.code.gson:gson:2.8.0'
-    provided 'com.squareup.retrofit2:converter-gson:2.2.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.2.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.7.0'
+    implementation 'com.squareup.okio:okio:1.12.0'
+    implementation 'com.google.code.gson:gson:2.8.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
     compile project(path: ':ronetwork')
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
 }

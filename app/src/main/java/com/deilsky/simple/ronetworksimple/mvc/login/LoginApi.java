@@ -1,5 +1,7 @@
 package com.deilsky.simple.ronetworksimple.mvc.login;
 
+import android.util.Log;
+
 import com.deilsky.network.RoResponse;
 import com.deilsky.network.RoResult;
 import com.deilsky.network.RoRetrofit;
@@ -16,7 +18,7 @@ import retrofit2.Response;
 
 public class LoginApi implements LoginContract {
     private LoginService service = null;
-    public static LoginApi instance;
+    static LoginApi instance;
 
     private LoginApi() {
         service = RoRetrofit.getInstance().create(LoginService.class);
@@ -28,18 +30,21 @@ public class LoginApi implements LoginContract {
     }
 
     @Override
-    public void post(LoginModel loginModel, final RoResultListener<String> listener) {
-        Call<RoResult<String>> call = service.post(loginModel);
+    public void post(LoginModel loginModel, final RoResultListener<Integer> listener) {
+        Call<RoResult<Integer>> call = service.post(loginModel);
         listener.onLoading();
-        call.enqueue(new Callback<RoResult<String>>() {
+        call.enqueue(new Callback<RoResult<Integer>>() {
             @Override
-            public void onResponse(Call<RoResult<String>> call, Response<RoResult<String>> response) {
-                new RoResponse<String>().formatter(response, listener);
+            public void onResponse(Call<RoResult<Integer>> call, Response<RoResult<Integer>> response) {
+                new RoResponse<Integer>().formatter(response, listener);
             }
-
             @Override
-            public void onFailure(Call<RoResult<String>> call, Throwable t) {
-                listener.onError(t.getMessage());
+            public void onFailure(Call<RoResult<Integer>> call, Throwable t) {
+                Log.d("onFailure",t.getMessage());
+                Log.d("onFailure",t.getLocalizedMessage());
+                //t.printStackTrace();
+
+                t.getCause().printStackTrace();
             }
         });
     }

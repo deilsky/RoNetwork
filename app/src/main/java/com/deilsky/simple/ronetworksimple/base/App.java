@@ -30,8 +30,11 @@ public class App extends Application {
         instance = this;
         appContext = this;
 
-        Contract contract = Contract.create().
-                service("http://xxx.xxx.xxx.xxx:xxxx/api/").sources("http://xxx.xxx.xxx.xxx:xxxx/").print(true);
+        Contract contract = Contract.create()
+                .service("http://192.168.31.155:8080/taxis/api/")
+                .sources("http://192.168.31.155:8080/taxis/")
+                .errorMessage(Contract.ErrorMessage.DETAILED)
+                .print(true);
         RoContract.create(contract);
 
 

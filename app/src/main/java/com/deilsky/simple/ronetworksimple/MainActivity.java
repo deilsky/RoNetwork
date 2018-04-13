@@ -22,14 +22,14 @@ import java.util.ArrayList;
 import okhttp3.ResponseBody;
 
 public class MainActivity extends AppCompatActivity {
-    private ProgressBar progressBar, progressBar1;
+    private ProgressBar progressBar1, progressBar2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        progressBar1 = (ProgressBar) findViewById(R.id.progressBar1);
+        progressBar1 =  findViewById(R.id.progressBar1);
+        progressBar2 =  findViewById(R.id.progressBar2);
         findViewById(R.id.get).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,12 +62,12 @@ public class MainActivity extends AppCompatActivity {
                 LoginModel model = new LoginModel();
                 model.setUserName("admin");
                 model.setPassWord("123456");
-                LoginApi.create().post(model, new RoResultListener<String>() {
+                LoginApi.create().post(model, new RoResultListener<Integer>() {
                     @Override
-                    public void onSuccess(RoResult<String> result) {
+                    public void onSuccess(RoResult<Integer> result) {
                         if (200 == result.getStatus()) {
-                            Log.d("post", result.getData());
-                            alert(result.getData());
+                            Log.d("post", result.getData()+"");
+                            alert(result.getData()+"");
                         }
                     }
 
@@ -85,15 +85,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        findViewById(R.id.upload).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.upload1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ArrayList<String> paths = new ArrayList<String>();
                 paths.add("/storage/emulated/0/程序/Cclocation.zip");
                 paths.add("/storage/emulated/0/snapshot/20170724120021495.jpeg");
-                /*
-                   无上传进度
-                NetApi.create().upload(paths, new RoCallBackListener<String>() {
+                   //无上传进度
+                UploadApi.create().upload(paths, new RoResultListener<String>() {
 
                     @Override
                     public void onSuccess(RoResult<String> result) {
@@ -114,8 +113,17 @@ public class MainActivity extends AppCompatActivity {
                     public void onError(String msg) {
                         Log.e("onError",msg);
                     }
-                });*/
+                });
+
+            }
+        });
+        findViewById(R.id.upload2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 // 有上传进度
+                ArrayList<String> paths = new ArrayList<String>();
+                paths.add("/storage/emulated/0/程序/Cclocation.zip");
+                paths.add("/storage/emulated/0/snapshot/20170724120021495.jpeg");
                 UploadApi.create().upload(paths, new RoUpLoadProgressListener<String>() {
 
                     @Override
@@ -217,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                progressBar.setProgress(p);
+                progressBar1.setProgress(p);
             }
         });
     }
@@ -228,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                progressBar1.setProgress(p);
+                progressBar2.setProgress(p);
             }
         });
     }

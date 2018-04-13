@@ -1,5 +1,6 @@
 package com.deilsky.network;
 
+import android.annotation.SuppressLint;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -39,6 +40,7 @@ public enum RoOkHttp {
 
     RoOkHttp() {
         OkHttpClient.Builder build = new OkHttpClient.Builder();
+
         build.addInterceptor(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
@@ -47,7 +49,8 @@ public enum RoOkHttp {
                 if (RoContract.PRINT) {
                     HttpUrl url = request.url();
                     String method = request.method();
-                    String info = String.format(RoContract.BASE.toString(), url, url.port(), method, response.isSuccessful(), response.code());
+                    @SuppressLint("DefaultLocale")
+                    String info = String.format(RoContract.BASE, url, url.port(), method, response.isSuccessful(), response.code());
                     Log.d(RoContract.TAG, info);
                     if (TextUtils.equals("GET", method)) {
                         Log.d(RoContract.TAG, String.format(RoContract.PARAMTER, "paramer.size", String.valueOf(url.querySize())));
@@ -92,7 +95,6 @@ public enum RoOkHttp {
         public BufferedSink write(ByteString byteString) throws IOException {
             if (byteString != null && !TextUtils.isEmpty(byteString.utf8())) {
                 String str = byteString.utf8();
-                Log.d("byteString:", str);
                 HashMap map = new Gson().fromJson(str, HashMap.class);
                 if (map != null && !map.isEmpty()) {
                     Set set = map.keySet();

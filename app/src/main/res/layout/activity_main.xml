@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:divider="@color/colorPrimaryDark"
+    android:divider="@color/colorAccent"
     android:orientation="vertical"
     android:showDividers="middle"
     tools:context="com.deilsky.simple.ronetworksimple.MainActivity">
@@ -24,22 +24,29 @@
         android:gravity="center"
         android:text="POST提交" />
 
+    <TextView
+        android:id="@+id/upload1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="无进度上传" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/progressBar1"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:max="100" />
 
     <TextView
-        android:id="@+id/upload"
+        android:id="@+id/upload2"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center"
-        android:text="上传" />
+        android:text="有进度上传" />
+
     <ProgressBar
-        android:id="@+id/progressBar1"
+        android:id="@+id/progressBar2"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="20dp"

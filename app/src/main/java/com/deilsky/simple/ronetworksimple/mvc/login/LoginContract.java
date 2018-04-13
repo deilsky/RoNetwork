@@ -9,6 +9,6 @@ import com.deilsky.simple.ronetworksimple.mvc.model.LoginModel;
  */
 
 public interface LoginContract {
-    void post(LoginModel loginModel, RoResultListener<String> listener);
+    void post(LoginModel loginModel, RoResultListener<Integer> listener);
     void get(RoResultListener<String> listener);
 }

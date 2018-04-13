@@ -13,7 +13,7 @@ import retrofit2.http.POST;
 
 public interface LoginService {
     @POST("post")
-    Call<RoResult<String>> post(@Body LoginModel loginModel);
+    Call<RoResult<Integer>> post(@Body LoginModel loginModel);
     @POST("get")
     Call<RoResult<String>> get();
 }

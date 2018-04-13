@@ -20,6 +20,12 @@ public class RoContract {
             "【 success : %4$s 】" + "\n";
     static final String PARAMTER = "【 %1$s : %2$s 】";
     static final String END = "【 DEILSKY RONETWORK END 】";
+    static final String THROWABLE_START = "【 DEILSKY RONETWORK ROTHROWABLE START 】";
+    static final String THROWABLE_END = "【 DEILSKY RONETWORK ROTHROWABLE END 】";
+    static final String THROWABLE_INFO = "【 ClassName : %1$s 】" + "\n" +
+            "【 FileName : %2$s 】" + "\n" +
+            "【 MethodName : %3$s 】" + "\n" +
+            "【 LineNumber : %4$d 】" + "\n";
 
     private RoContract() {
     }
