@@ -21,7 +21,6 @@ public interface NetService {
     @Multipart
     @POST("upload")
     Call<RoResult<String>> upload(@Part List<MultipartBody.Part> file);
-
     @GET
     Call<RoResult<ResponseBody>> download(@Url String path);
 }

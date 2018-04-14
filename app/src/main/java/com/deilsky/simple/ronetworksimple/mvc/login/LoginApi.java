@@ -61,7 +61,8 @@ public class LoginApi implements LoginContract {
 
             @Override
             public void onFailure(Call<RoResult<String>> call, Throwable t) {
-                listener.onError(t.getMessage());
+                //listener.onError(t.getMessage());
+
             }
         });
     }

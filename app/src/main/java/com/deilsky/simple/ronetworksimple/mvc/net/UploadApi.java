@@ -26,7 +26,6 @@ import retrofit2.Response;
 public class UploadApi implements NetContract.UploadContract {
     private NetService service = null;
     public static UploadApi instance;
-
     private UploadApi() {
         service = RoRetrofit.getInstance().create(NetService.class);
     }
@@ -51,7 +50,6 @@ public class UploadApi implements NetContract.UploadContract {
             public void onResponse(Call<RoResult<String>> call, Response<RoResult<String>> response) {
                 new RoResponse<String>().formatter(response,listener);
             }
-
             @Override
             public void onFailure(Call<RoResult<String>> call, Throwable t) {
                 for (StackTraceElement stackTraceElement : t.getStackTrace()) {
@@ -76,7 +74,6 @@ public class UploadApi implements NetContract.UploadContract {
             public void onResponse(Call<RoResult<String>> call, Response<RoResult<String>> response) {
                 new RoResponse<String>().formatter(response,listener);
             }
-
             @Override
             public void onFailure(Call<RoResult<String>> call, Throwable t) {
                 for (StackTraceElement stackTraceElement : t.getStackTrace()) {
@@ -85,8 +82,4 @@ public class UploadApi implements NetContract.UploadContract {
             }
         });
     }
-
-
-
-
 }

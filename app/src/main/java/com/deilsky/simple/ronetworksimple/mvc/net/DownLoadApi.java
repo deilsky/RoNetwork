@@ -18,11 +18,9 @@ import retrofit2.Response;
 public class DownLoadApi implements NetContract.DownLoadContract {
     private NetService service = null;
     public static DownLoadApi instance;
-
     private DownLoadApi() {
         service = RoRetrofit.getOtherInstance().create(NetService.class);
     }
-
     public static DownLoadApi create() {
         instance = new DownLoadApi();
         return instance;
@@ -36,7 +34,6 @@ public class DownLoadApi implements NetContract.DownLoadContract {
             public void onResponse(Call<RoResult<ResponseBody>> call, Response<RoResult<ResponseBody>> response) {
                 new RoResponse<ResponseBody>().formatter(response, listener);
             }
-
             @Override
             public void onFailure(Call<RoResult<ResponseBody>> call, Throwable t) {
                 for (StackTraceElement stackTraceElement : t.getStackTrace()) {

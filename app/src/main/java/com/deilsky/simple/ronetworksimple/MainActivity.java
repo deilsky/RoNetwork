@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        progressBar1 =  findViewById(R.id.progressBar1);
-        progressBar2 =  findViewById(R.id.progressBar2);
+        progressBar1 = findViewById(R.id.progressBar1);
+        progressBar2 = findViewById(R.id.progressBar2);
         findViewById(R.id.get).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(RoResult<Integer> result) {
                         if (200 == result.getStatus()) {
-                            Log.d("post", result.getData()+"");
-                            alert(result.getData()+"");
+                            Log.d("post", result.getData() + "");
+                            alert(result.getData() + "");
                         }
                     }
 
@@ -91,15 +91,15 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<String> paths = new ArrayList<String>();
                 paths.add("/storage/emulated/0/程序/Cclocation.zip");
                 paths.add("/storage/emulated/0/snapshot/20170724120021495.jpeg");
-                   //无上传进度
+                //无上传进度
                 UploadApi.create().upload(paths, new RoResultListener<String>() {
 
                     @Override
                     public void onSuccess(RoResult<String> result) {
-                        Log.d("result:",result.toString());
+                        Log.d("result:", result.toString());
                         if (200 == result.getStatus()) {
-                            for (Object s : result.getList()) {
-                                Log.d("path:", s+"");
+                            for (String s : result.getList()) {
+                                Log.d("path:", s + "");
                             }
                         }
                     }
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(String msg) {
-                        Log.e("onError",msg);
+                        Log.e("onError", msg);
                     }
                 });
 
@@ -156,28 +156,27 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.download).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DownLoadApi.create()
-                        .download("resources/upload/header/e9c8c3f0/7b12/4750/8681/8794badc9407/20171129105444823.zip",
-                                new RoResultListener<ResponseBody>() {
-                                    @Override
-                                    public void onSuccess(RoResult<ResponseBody> result) {
-                                        Log.d("download", result.toString());
-                                        if (result.getStatus() == 200) {
-                                            download(result.getData());
-                                        }
+                DownLoadApi.create().download("resources/upload/header/e9c8c3f0/7b12/4750/8681/8794badc9407/20171129105444823.zip",
+                        new RoResultListener<ResponseBody>() {
+                            @Override
+                            public void onSuccess(RoResult<ResponseBody> result) {
+                                Log.d("download", result.toString());
+                                if (result.getStatus() == 200) {
+                                    download(result.getData());
+                                }
 
-                                    }
+                            }
 
-                                    @Override
-                                    public void onLoading() {
+                            @Override
+                            public void onLoading() {
 
-                                    }
+                            }
 
-                                    @Override
-                                    public void onError(String msg) {
-                                        Log.e("download--onError:", msg);
-                                    }
-                                });
+                            @Override
+                            public void onError(String msg) {
+                                Log.e("download--onError:", msg);
+                            }
+                        });
             }
 
 

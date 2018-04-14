@@ -14,10 +14,8 @@ import okhttp3.ResponseBody;
 public interface NetContract {
     interface UploadContract {
         void upload(ArrayList<String> paths, RoUpLoadProgressListener<String> listener);
-
         void upload(ArrayList<String> paths, RoResultListener<String> listener);
     }
-
     interface DownLoadContract {
         void download(String path, RoResultListener<ResponseBody> listener);
     }
