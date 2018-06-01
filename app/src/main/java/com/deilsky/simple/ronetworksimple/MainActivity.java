@@ -14,6 +14,7 @@ import com.deilsky.network.listener.RoResultListener;
 import com.deilsky.network.listener.RoUpLoadProgressListener;
 import com.deilsky.simple.ronetworksimple.mvc.login.LoginApi;
 import com.deilsky.simple.ronetworksimple.mvc.model.LoginModel;
+import com.deilsky.simple.ronetworksimple.mvc.model.GetModel;
 import com.deilsky.simple.ronetworksimple.mvc.net.DownLoadApi;
 import com.deilsky.simple.ronetworksimple.mvc.net.UploadApi;
 
@@ -33,12 +34,13 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.get).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LoginApi.create().get(new RoResultListener<String>() {
+                LoginApi.create().get(30, new RoResultListener<GetModel>() {
                     @Override
-                    public void onSuccess(RoResult<String> result) {
+                    public void onSuccess(RoResult<GetModel> result) {
                         if (200 == result.getStatus()) {
-                            Log.d("GET", result.getData());
-                            alert(result.getData());
+                            for (GetModel searchModel : result.getList()) {
+                                Log.d("get onSuccess:", searchModel.toString());
+                            }
                         }
 
                     }

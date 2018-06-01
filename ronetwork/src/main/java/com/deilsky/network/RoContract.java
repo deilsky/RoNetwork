@@ -8,17 +8,12 @@ public class RoContract {
     static String SERVICE;
     static String SOURCES;
     static boolean PRINT = true;
+    static boolean PRINT_HEADER = false;
+    static boolean PRINT_BODY = true;
     private static RoContract instance = new RoContract();
     static final String TAG = "DEILSKY RONETWORK";
-
-    static final String BASE = "【 DEILSKY RONETWORK START 】" + "\n" +
-            "【 url : %1$s 】" + "\n" +
-            "【 port : %2$s 】" + "\n" +
-            "【 method : %3$s 】" + "\n" +
-            "【 code : %5$d 】" + "\n" +
-            "【 success : %4$s 】" + "\n";
-    static final String PARAMTER = "【 %1$s : %2$s 】";
-    static final String END = "【 DEILSKY RONETWORK END 】";
+    static final String HEADER = "DEILSKY HEADER";
+    static final String BODY = "DEILSKY BODY";
 
     private RoContract() {
     }
@@ -27,6 +22,8 @@ public class RoContract {
         SERVICE = contract.service();
         SOURCES = contract.sources();
         PRINT = contract.print();
+        PRINT_HEADER = contract.header();
+        PRINT_BODY = contract.body();
         return instance;
     }
 }

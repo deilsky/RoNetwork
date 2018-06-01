@@ -8,6 +8,8 @@ public class RoDefine {
     private static String service;
     private static String sources;
     private static boolean print = true;
+    private static boolean header = false;
+    private static boolean body = true;
     private static RoDefine contract = null;
 
 
@@ -17,17 +19,6 @@ public class RoDefine {
     public static RoDefine create() {
         contract = new RoDefine();
         return contract;
-    }
-
-    public RoDefine(String service, String sources) {
-        RoDefine.service = service;
-        RoDefine.sources = sources;
-    }
-
-    public RoDefine(String service, String sources, boolean print) {
-        RoDefine.service = service;
-        RoDefine.sources = sources;
-        RoDefine.print = print;
     }
 
     public RoDefine service(String service) {
@@ -45,6 +36,16 @@ public class RoDefine {
         return this;
     }
 
+    public RoDefine printHeader(boolean header) {
+        RoDefine.header = header;
+        return this;
+    }
+
+    public RoDefine printBody(boolean body) {
+        RoDefine.body = body;
+        return this;
+    }
+
 
     String service() {
         return service;
@@ -56,5 +57,13 @@ public class RoDefine {
 
     boolean print() {
         return print;
+    }
+
+    boolean header() {
+        return header;
+    }
+
+    boolean body() {
+        return body;
     }
 }

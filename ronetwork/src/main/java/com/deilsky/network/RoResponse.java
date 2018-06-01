@@ -1,7 +1,5 @@
 package com.deilsky.network;
 
-import android.util.Log;
-
 import com.deilsky.network.listener.RoResultListener;
 
 import retrofit2.Response;

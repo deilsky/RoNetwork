@@ -31,8 +31,8 @@ public class App extends Application {
         appContext = this;
 
         RoDefine contract = RoDefine.create()
-                .service("http://192.168.31.155:8080/taxis/api/")
-                .sources("http://192.168.31.155:8080/taxis/")
+                .service("http://app.antlink.com/api/")
+                .sources("http://app.antlink.com/")
                 .print(true);
         RoContract.create(contract);
 

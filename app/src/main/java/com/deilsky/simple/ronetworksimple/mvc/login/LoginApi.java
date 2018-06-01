@@ -7,6 +7,7 @@ import com.deilsky.network.RoResult;
 import com.deilsky.network.RoRetrofit;
 import com.deilsky.network.listener.RoResultListener;
 import com.deilsky.simple.ronetworksimple.mvc.model.LoginModel;
+import com.deilsky.simple.ronetworksimple.mvc.model.GetModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,10 +39,11 @@ public class LoginApi implements LoginContract {
             public void onResponse(Call<RoResult<Integer>> call, Response<RoResult<Integer>> response) {
                 new RoResponse<Integer>().formatter(response, listener);
             }
+
             @Override
             public void onFailure(Call<RoResult<Integer>> call, Throwable t) {
-                Log.d("onFailure",t.getMessage());
-                Log.d("onFailure",t.getLocalizedMessage());
+                Log.d("onFailure", t.getMessage());
+                Log.d("onFailure", t.getLocalizedMessage());
                 //t.printStackTrace();
 
                 t.getCause().printStackTrace();
@@ -50,17 +52,17 @@ public class LoginApi implements LoginContract {
     }
 
     @Override
-    public void get(final RoResultListener<String> listener) {
-        Call<RoResult<String>> call = service.get();
+    public void get(int id, final RoResultListener<GetModel> listener) {
+        Call<RoResult<GetModel>> call = service.get(id);
         listener.onLoading();
-        call.enqueue(new Callback<RoResult<String>>() {
+        call.enqueue(new Callback<RoResult<GetModel>>() {
             @Override
-            public void onResponse(Call<RoResult<String>> call, Response<RoResult<String>> response) {
-                new RoResponse<String>().formatter(response, listener);
+            public void onResponse(Call<RoResult<GetModel>> call, Response<RoResult<GetModel>> response) {
+                new RoResponse<GetModel>().formatter(response, listener);
             }
 
             @Override
-            public void onFailure(Call<RoResult<String>> call, Throwable t) {
+            public void onFailure(Call<RoResult<GetModel>> call, Throwable t) {
                 //listener.onError(t.getMessage());
 
             }
