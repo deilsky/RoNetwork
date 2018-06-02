@@ -22,7 +22,13 @@ allprojects {
 ### Step 2. Add the dependency
 ```
 dependencies {
-   compile 'com.github.deilsky:RoNetwork:v1.0'
+    compile 'com.github.deilsky:RoNetwork:v1.1.1'
+    compile 'com.squareup.retrofit2:retrofit:version code'
+    compile 'com.squareup.retrofit2:converter-gson:ersion code'
+    compile 'com.squareup.okhttp3:okhttp:ersion code'
+    compile 'com.squareup.okio:okio:ersion code'
+    compile 'com.google.code.gson:gson:ersion code'
+    compile 'com.squareup.okhttp3:logging-interceptor:ersion code'
 }
 ```
 ### Step 3. Used
@@ -36,7 +42,9 @@ public class App extends Application {
     Contract contract = Contract.create()
         .service("http://192.168.1.21:8021/api/")//url前缀
         .sources("http://192.168.1.21:8021/")//资源前缀或备用url
-        .print(true);//是否打印日志
+        .print(true)//是否打印日志
+        .printHeader(true)//是否打印请求的header 默认false
+        .printBody(true);//是否打印请求的body 默认 true
         RoContract.create(contract);
   }
 }
