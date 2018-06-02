@@ -24,11 +24,11 @@ allprojects {
 dependencies {
     compile 'com.github.deilsky:RoNetwork:v1.1.1'
     compile 'com.squareup.retrofit2:retrofit:version code'
-    compile 'com.squareup.retrofit2:converter-gson:ersion code'
-    compile 'com.squareup.okhttp3:okhttp:ersion code'
-    compile 'com.squareup.okio:okio:ersion code'
-    compile 'com.google.code.gson:gson:ersion code'
-    compile 'com.squareup.okhttp3:logging-interceptor:ersion code'
+    compile 'com.squareup.retrofit2:converter-gson:version code'
+    compile 'com.squareup.okhttp3:okhttp:version code'
+    compile 'com.squareup.okio:okio:version code'
+    compile 'com.google.code.gson:gson:version code'
+    compile 'com.squareup.okhttp3:logging-interceptor:version code'
 }
 ```
 ### Step 3. Used
