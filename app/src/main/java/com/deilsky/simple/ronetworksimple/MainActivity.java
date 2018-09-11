@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.deilsky.network.RoContract;
+import com.deilsky.network.RoDefine;
 import com.deilsky.network.RoDownLoad;
 import com.deilsky.network.RoResult;
 import com.deilsky.network.listener.RoDownLoadProgressListener;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         progressBar1 = findViewById(R.id.progressBar1);
         progressBar2 = findViewById(R.id.progressBar2);
+
         findViewById(R.id.get).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onSuccess(RoResult<GetModel> result) {
                         if (200 == result.getStatus()) {
                             for (GetModel searchModel : result.getList()) {
+                                Log.d("logssssss", RoDefine.sources()+"~~~~~~~~~");
+
                                 Log.d("get onSuccess:", searchModel.toString());
                             }
                         }

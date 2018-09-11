@@ -47,11 +47,11 @@ public class RoDefine {
     }
 
 
-    String service() {
+    public static String service() {
         return service;
     }
 
-    String sources() {
+    public static String sources() {
         return sources;
     }
 

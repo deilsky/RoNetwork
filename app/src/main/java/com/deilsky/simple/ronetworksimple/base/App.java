@@ -34,6 +34,7 @@ public class App extends Application {
                 .service("http://app.antlink.com/api/")
                 .sources("http://app.antlink.com/")
                 .print(true);
+
         RoContract.create(contract);
 
 
