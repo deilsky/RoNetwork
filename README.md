@@ -22,7 +22,7 @@ allprojects {
 ### Step 2. Add the dependency
 ```
 dependencies {
-    compile 'com.github.deilsky:RoNetwork:v1.1.1'
+    compile 'com.github.deilsky:RoNetwork:v1.1.2'
     compile 'com.squareup.retrofit2:retrofit:version code'
     compile 'com.squareup.retrofit2:converter-gson:version code'
     compile 'com.squareup.okhttp3:okhttp:version code'
