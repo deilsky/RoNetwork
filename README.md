@@ -7,10 +7,33 @@ RoNetwork 基于 retrofit 2, okhttp 3, gson实现的网络请求框架。
 3.文件上传/下载 以及进度监听
 4.实时打印日志，请求参数等
 ```
+# How to
+## To get a Git project into your build:
+### Step 1. Add the JitPack repository to your build file
+#### Add it in your root build.gradle at the end of repositories:
 ```
-使用方法
-1.compile 'com.deilsky:RoNetwork:x.x.x'
-2.在APP中设置URL
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+### Step 2. Add the dependency
+```
+dependencies {
+    compile 'com.github.deilsky:RoNetwork:v1.1.2'
+    compile 'com.squareup.retrofit2:retrofit:version code'
+    compile 'com.squareup.retrofit2:converter-gson:version code'
+    compile 'com.squareup.okhttp3:okhttp:version code'
+    compile 'com.squareup.okio:okio:version code'
+    compile 'com.google.code.gson:gson:version code'
+    compile 'com.squareup.okhttp3:logging-interceptor:version code'
+}
+```
+### Step 3. Used
+#### Step 3.1 Application 设置
+```
 public class App extends Application {
   ………
   @Override
@@ -19,24 +42,28 @@ public class App extends Application {
     Contract contract = Contract.create()
         .service("http://192.168.1.21:8021/api/")//url前缀
         .sources("http://192.168.1.21:8021/")//资源前缀或备用url
-        .print(true);//是否打印日志
+        .print(true)//是否打印日志
+        .printHeader(true)//是否打印请求的header 默认false
+        .printBody(true);//是否打印请求的body 默认 true
         RoContract.create(contract);
   }
 }
-3.普通get/post请求
-3.1 service
+```
+#### Step 3.2. 普通get/post请求
+```
+service
 public interface LoginService {
     @POST("post")
     Call<RoResult<Integer>> post(@Body LoginModel loginModel);
     @POST("get")
     Call<RoResult<String>> get();
 }
-3.2 接口定义
+接口定义
 public interface LoginContract {
     void post(LoginModel loginModel, RoResultListener<Integer> listener);
     void get(RoResultListener<String> listener);
 }
-3.3 具体请求
+具体请求
 public class LoginApi implements LoginContract {
     private LoginService service = null;
     static LoginApi instance;
@@ -81,7 +108,7 @@ public class LoginApi implements LoginContract {
         });
     }
 }
-3.4 调用get
+调用get
 LoginApi.create().get(new RoResultListener<String>() {
     @Override
     public void onSuccess(RoResult<String> result) {
@@ -96,7 +123,7 @@ LoginApi.create().get(new RoResultListener<String>() {
         Log.e("onError", msg);
     }
 });
-3.5 调用post
+调用post
 LoginModel model = new LoginModel();
 model.setUserName("admin");
 model.setPassWord("123456");
@@ -114,8 +141,8 @@ LoginApi.create().post(model, new RoResultListener<Integer>() {
         Log.e("onError", msg);
     }
 });
-4 文件上传/下载以及进度监听
-4.1 service
+文件上传/下载以及进度监听
+service
 public interface NetContract {
     interface UploadContract {
         void upload(ArrayList<String> paths, RoUpLoadProgressListener<String> listener);
@@ -125,7 +152,7 @@ public interface NetContract {
         void download(String path, RoResultListener<ResponseBody> listener);
     }
 }
-4.2 接口定义
+接口定义
 public interface NetService {
     @Multipart
     @POST("upload")
@@ -133,7 +160,7 @@ public interface NetService {
     @GET
     Call<RoResult<ResponseBody>> download(@Url String path);
 }
-4.3 上传实现
+上传实现
 public class UploadApi implements NetContract.UploadContract {
     private NetService service = null;
     public static UploadApi instance;
@@ -194,7 +221,7 @@ public class UploadApi implements NetContract.UploadContract {
         });
     }
 }
-4.4 下载实现
+下载实现
 public class DownLoadApi implements NetContract.DownLoadContract {
     private NetService service = null;
     public static DownLoadApi instance;
@@ -223,7 +250,7 @@ public class DownLoadApi implements NetContract.DownLoadContract {
         });
     }
 }
-4.5 具体调用
+具体调用
 //上传文件，无进度
 ArrayList<String> paths = new ArrayList<String>();
 paths.add("/storage/emulated/0/XX/Cclocation.zip");
@@ -331,4 +358,5 @@ private void downloadProgress(long progress, long total) {
     });
 }
 ```
-欢迎留言~
+[![](https://jitpack.io/v/deilsky/RoNetwork.svg)](https://jitpack.io/#deilsky/RoNetwork)
+#### 欢迎留言~
