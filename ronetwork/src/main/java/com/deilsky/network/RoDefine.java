@@ -21,12 +21,12 @@ public class RoDefine {
     }
 
     public RoDefine service(String service) {
-        service = service;
+        this.service = service;
         return this;
     }
 
     public RoDefine sources(String sources) {
-        sources = sources;
+        this.sources = sources;
         return this;
     }
 

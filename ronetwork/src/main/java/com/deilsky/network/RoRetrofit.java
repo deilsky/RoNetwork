@@ -7,18 +7,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by 帷幕 on 2017/10/9.
  */
 public class RoRetrofit {
+    public RoRetrofit() {
+    }
+
     public static Retrofit getInstance() {
         Retrofit.Builder builder = new Retrofit.Builder();
-        builder.baseUrl(RoContract.SERVICE)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(RoOkHttp.INSTANCE.getInstance());
+        builder.baseUrl(RoContract.SERVICE).addConverterFactory(GsonConverterFactory.create()).client(RoOkHttp.INSTANCE.getInstance());
         return builder.build();
     }
+
     public static Retrofit getOtherInstance() {
         Retrofit.Builder builder = new Retrofit.Builder();
         builder.baseUrl(RoContract.SOURCES);
-        builder.addConverterFactory(GsonConverterFactory.create())
-                .client(RoOkHttp.INSTANCE.getInstance());
+        builder.addConverterFactory(GsonConverterFactory.create()).client(RoOkHttp.INSTANCE.getInstance());
         return builder.build();
     }
 }

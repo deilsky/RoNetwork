@@ -29,7 +29,7 @@ public enum RoOkHttp {
         this.instance = build.build();
     }
 
-    public static enum RoLevel {
+    public enum RoLevel {
         HEADER,
         BODY;
 
