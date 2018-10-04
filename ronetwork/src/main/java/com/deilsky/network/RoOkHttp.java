@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -86,6 +87,11 @@ public enum RoOkHttp {
     }
 
     private BufferedSink sink = new BufferedSink() {
+        @Override
+        public int write(ByteBuffer src) throws IOException {
+            return 0;
+        }
+
         @Override
         public Buffer buffer() {
             return null;
@@ -226,6 +232,11 @@ public enum RoOkHttp {
         @Override
         public Timeout timeout() {
             return null;
+        }
+
+        @Override
+        public boolean isOpen() {
+            return false;
         }
 
         @Override

@@ -2,7 +2,6 @@ package com.deilsky.simple.ronetworksimple.mvc.net;
 
 
 import com.deilsky.network.RoResponse;
-import com.deilsky.network.RoResult;
 import com.deilsky.network.RoRetrofit;
 import com.deilsky.network.listener.RoResultListener;
 
@@ -18,9 +17,11 @@ import retrofit2.Response;
 public class DownLoadApi implements NetContract.DownLoadContract {
     private NetService service = null;
     public static DownLoadApi instance;
+
     private DownLoadApi() {
         service = RoRetrofit.getOtherInstance().create(NetService.class);
     }
+
     public static DownLoadApi create() {
         instance = new DownLoadApi();
         return instance;
@@ -28,17 +29,17 @@ public class DownLoadApi implements NetContract.DownLoadContract {
 
     @Override
     public void download(String path, final RoResultListener<ResponseBody> listener) {
-        Call<RoResult<ResponseBody>> call = service.download(path);
-        call.enqueue(new Callback<RoResult<ResponseBody>>() {
+
+        Call<ResponseBody> call = service.download(path);
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<RoResult<ResponseBody>> call, Response<RoResult<ResponseBody>> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 new RoResponse<ResponseBody>().formatter(response, listener);
             }
+
             @Override
-            public void onFailure(Call<RoResult<ResponseBody>> call, Throwable t) {
-                for (StackTraceElement stackTraceElement : t.getStackTrace()) {
-                    listener.onError(stackTraceElement.toString());
-                }
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                listener.onError(t.getMessage());
             }
         });
     }

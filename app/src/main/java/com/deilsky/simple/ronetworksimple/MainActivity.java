@@ -9,11 +9,12 @@ import android.widget.Toast;
 
 import com.deilsky.network.RoDownLoad;
 import com.deilsky.network.RoResult;
-import com.deilsky.network.listener.RoDownLoadProgressListener;
+import com.deilsky.network.listener.RoProgressDownLoadListener;
+import com.deilsky.network.listener.RoProgressUpLoadListener;
 import com.deilsky.network.listener.RoResultListener;
-import com.deilsky.network.listener.RoUpLoadProgressListener;
-import com.deilsky.simple.ronetworksimple.mvc.login.LoginApi;
-import com.deilsky.simple.ronetworksimple.mvc.model.LoginModel;
+import com.deilsky.simple.ronetworksimple.mvc.login.TestApi;
+import com.deilsky.simple.ronetworksimple.mvc.model.Banner;
+import com.deilsky.simple.ronetworksimple.mvc.model.Users;
 import com.deilsky.simple.ronetworksimple.mvc.net.DownLoadApi;
 import com.deilsky.simple.ronetworksimple.mvc.net.UploadApi;
 
@@ -33,14 +34,15 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.get).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LoginApi.create().get(new RoResultListener<String>() {
-                    @Override
-                    public void onSuccess(RoResult<String> result) {
-                        if (200 == result.getStatus()) {
-                            Log.d("GET", result.getData());
-                            alert(result.getData());
-                        }
 
+                TestApi.create().banners(new RoResultListener<RoResult<Banner>>() {
+                    @Override
+                    public void onSuccess(RoResult<Banner> result) {
+                        if (200 == result.getStatus()) {
+                            for (Banner banner : result.getList()) {
+                                Log.d("banners:", banner.getPath());
+                            }
+                        }
                     }
 
                     @Override
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(String msg) {
-                        Log.e("onError", msg);
+                        alert(msg);
                     }
                 });
             }
@@ -59,15 +61,15 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.post).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LoginModel model = new LoginModel();
-                model.setUserName("admin");
+                Users model = new Users();
+                model.setPhone("17XXXXXXXX1");
                 model.setPassWord("123456");
-                LoginApi.create().post(model, new RoResultListener<Integer>() {
+                TestApi.create().login(model, new RoResultListener<RoResult<Users>>() {
                     @Override
-                    public void onSuccess(RoResult<Integer> result) {
+                    public void onSuccess(RoResult<Users> result) {
                         if (200 == result.getStatus()) {
-                            Log.d("post", result.getData() + "");
-                            alert(result.getData() + "");
+                            Log.d("post", result.getMsg() + "");
+                            alert(result.getMsg() + "");
                         }
                     }
 
@@ -84,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         findViewById(R.id.upload1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 paths.add("/storage/emulated/0/程序/Cclocation.zip");
                 paths.add("/storage/emulated/0/snapshot/20170724120021495.jpeg");
                 //无上传进度
-                UploadApi.create().upload(paths, new RoResultListener<String>() {
+                UploadApi.create().upload(paths, new RoResultListener<RoResult<String>>() {
 
                     @Override
                     public void onSuccess(RoResult<String> result) {
@@ -122,9 +123,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // 有上传进度
                 ArrayList<String> paths = new ArrayList<String>();
-                paths.add("/storage/emulated/0/程序/Cclocation.zip");
-                paths.add("/storage/emulated/0/snapshot/20170724120021495.jpeg");
-                UploadApi.create().upload(paths, new RoUpLoadProgressListener<String>() {
+                paths.add("/storage/emulated/0/程序/text.zip");
+                paths.add("/storage/emulated/0/程序/text2.zip");
+                UploadApi.create().upload(paths, new RoProgressUpLoadListener<RoResult<String>>() {
 
                     @Override
                     public void onProgress(long progress, long size, boolean hasFinish) {
@@ -156,15 +157,13 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.download).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DownLoadApi.create().download("resources/upload/header/e9c8c3f0/7b12/4750/8681/8794badc9407/20171129105444823.zip",
+                DownLoadApi.create().download("resources/text.zip",
                         new RoResultListener<ResponseBody>() {
-                            @Override
-                            public void onSuccess(RoResult<ResponseBody> result) {
-                                Log.d("download", result.toString());
-                                if (result.getStatus() == 200) {
-                                    download(result.getData());
-                                }
 
+                            @Override
+                            public void onSuccess(ResponseBody result) {
+                                Log.d("download", result.toString());
+                                    download(result);
                             }
 
                             @Override
@@ -188,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                RoDownLoad.writeResponseBodyToDisk(MainActivity.this, data, null, new RoDownLoadProgressListener() {
+                RoDownLoad.writeResponseBodyToDisk(MainActivity.this, data, null, new RoProgressDownLoadListener() {
                     @Override
                     public void onFinashed(String path) {
 
@@ -231,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void downloadProgress(long progress, long total) {
         final int p = Integer.parseInt(String.format("%1d", (progress * 100 / total)));
-        //Log.d("showProgress", "progress:" + progress + "," + total + "," + p);
+        Log.d("showProgress", "progress:" + progress + "," + total + "," + p);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

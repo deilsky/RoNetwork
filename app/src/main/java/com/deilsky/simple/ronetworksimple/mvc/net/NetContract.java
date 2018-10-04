@@ -1,7 +1,8 @@
 package com.deilsky.simple.ronetworksimple.mvc.net;
 
+import com.deilsky.network.RoResult;
 import com.deilsky.network.listener.RoResultListener;
-import com.deilsky.network.listener.RoUpLoadProgressListener;
+import com.deilsky.network.listener.RoProgressUpLoadListener;
 
 import java.util.ArrayList;
 
@@ -13,8 +14,8 @@ import okhttp3.ResponseBody;
 
 public interface NetContract {
     interface UploadContract {
-        void upload(ArrayList<String> paths, RoUpLoadProgressListener<String> listener);
-        void upload(ArrayList<String> paths, RoResultListener<String> listener);
+        void upload(ArrayList<String> paths, RoProgressUpLoadListener<RoResult<String>> listener);
+        void upload(ArrayList<String> paths, RoResultListener<RoResult<String>> listener);
     }
     interface DownLoadContract {
         void download(String path, RoResultListener<ResponseBody> listener);

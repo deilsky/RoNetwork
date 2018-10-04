@@ -7,7 +7,7 @@ package com.deilsky.network;
 public class RoContract {
     static String SERVICE;
     static String SOURCES;
-    static boolean PRINT = true;
+    static boolean PRINT = false;
     private static RoContract instance = new RoContract();
     static final String TAG = "DEILSKY RONETWORK";
 

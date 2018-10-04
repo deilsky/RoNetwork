@@ -1,7 +1,10 @@
 package com.deilsky.simple.ronetworksimple.mvc.net;
 
 import com.deilsky.network.RoResult;
+import com.deilsky.network.listener.RoProgressUpLoadListener;
+import com.deilsky.network.listener.RoResultListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.MultipartBody;
@@ -19,8 +22,9 @@ import retrofit2.http.Url;
 
 public interface NetService {
     @Multipart
-    @POST("upload")
+    @POST("users/upload")
     Call<RoResult<String>> upload(@Part List<MultipartBody.Part> file);
+
     @GET
-    Call<RoResult<ResponseBody>> download(@Url String path);
+    Call<ResponseBody> download(@Url String path);
 }

@@ -31,9 +31,8 @@ public class App extends Application {
         appContext = this;
 
         RoDefine contract = RoDefine.create()
-                .service("http://192.168.31.155:8080/taxis/api/")
-                .sources("http://192.168.31.155:8080/taxis/")
-                .print(true);
+                .service("http://192.168.31.155:8080/eshop/api/")
+                .sources("http://192.168.31.155:8080/eshop/").print(true);
         RoContract.create(contract);
 
 

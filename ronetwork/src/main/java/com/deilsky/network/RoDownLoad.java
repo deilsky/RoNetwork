@@ -4,7 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.deilsky.network.listener.RoDownLoadProgressListener;
+import com.deilsky.network.listener.RoProgressDownLoadListener;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,7 +24,7 @@ public class RoDownLoad {
     private static final String TAG = "【 DEILSKY RODOWNLOAD 】";
     private static String fileSuffix = "";
 
-    public static boolean writeResponseBodyToDisk(Context context, ResponseBody body, String name, RoDownLoadProgressListener listener) {
+    public static boolean writeResponseBodyToDisk(Context context, ResponseBody body, String name, RoProgressDownLoadListener listener) {
         Log.d(TAG, "contentType:>>>>" + body.contentType().toString());
         MediaType mediaType = body.contentType();
         StringBuffer _type = new StringBuffer();

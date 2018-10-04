@@ -7,7 +7,7 @@ package com.deilsky.network;
 public class RoDefine {
     private static String service;
     private static String sources;
-    private static boolean print = true;
+    private static boolean print = false;
     private static RoDefine contract = null;
 
 

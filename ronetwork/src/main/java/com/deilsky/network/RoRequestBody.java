@@ -1,6 +1,6 @@
 package com.deilsky.network;
 
-import com.deilsky.network.listener.RoUpLoadProgressListener;
+import com.deilsky.network.listener.RoProgressUpLoadListener;
 
 import java.io.IOException;
 
@@ -19,10 +19,10 @@ import okio.Sink;
 public class RoRequestBody extends RequestBody {
 
     private RequestBody mRequestBody;
-    private RoUpLoadProgressListener listener;
+    private RoProgressUpLoadListener listener;
     private BufferedSink bufferedSink;
 
-    public RoRequestBody(RequestBody mRequestBody, RoUpLoadProgressListener listener) {
+    public RoRequestBody(RequestBody mRequestBody, RoProgressUpLoadListener listener) {
         this.mRequestBody = mRequestBody;
         this.listener = listener;
     }

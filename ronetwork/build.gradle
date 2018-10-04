@@ -57,12 +57,12 @@ android {
 }
 
 dependencies {
-    provided fileTree(dir: 'libs', include: ['*.jar'])
-    provided 'com.android.support:appcompat-v7:26.1.0'
-    provided 'com.squareup.retrofit2:retrofit:2.2.0'
-    provided 'com.squareup.okhttp3:okhttp:3.7.0'
-    provided 'com.squareup.okio:okio:1.12.0'
-    provided 'com.google.code.gson:gson:2.8.0'
-    provided 'com.squareup.retrofit2:converter-gson:2.2.0'
-    testProvided 'junit:junit:4.12'
+    compileOnly fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly 'com.android.support:appcompat-v7:26.1.0'
+    compileOnly 'com.squareup.retrofit2:retrofit:2.4.0'
+    compileOnly 'com.squareup.okhttp3:okhttp:3.10.0'
+    compileOnly 'com.squareup.okio:okio:1.14.1'
+    compileOnly 'com.google.code.gson:gson:2.8.4'
+    compileOnly 'com.squareup.retrofit2:converter-gson:2.4.0'
+    testCompileOnly 'junit:junit:4.12'
 }
