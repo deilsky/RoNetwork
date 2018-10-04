@@ -64,5 +64,6 @@ dependencies {
     compileOnly 'com.squareup.okio:okio:1.14.1'
     compileOnly 'com.google.code.gson:gson:2.8.4'
     compileOnly 'com.squareup.retrofit2:converter-gson:2.4.0'
+    compileOnly 'com.squareup.okhttp3:logging-interceptor:3.10.0'
     testCompileOnly 'junit:junit:4.12'
 }

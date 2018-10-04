@@ -7,9 +7,10 @@ package com.deilsky.network;
 public class RoDefine {
     private static String service;
     private static String sources;
-    private static boolean print = false;
+    private static boolean print = true;
+    private static boolean header = false;
+    private static boolean body = true;
     private static RoDefine contract = null;
-
 
     private RoDefine() {
     }
@@ -19,42 +20,48 @@ public class RoDefine {
         return contract;
     }
 
-    public RoDefine(String service, String sources) {
-        RoDefine.service = service;
-        RoDefine.sources = sources;
-    }
-
-    public RoDefine(String service, String sources, boolean print) {
-        RoDefine.service = service;
-        RoDefine.sources = sources;
-        RoDefine.print = print;
-    }
-
     public RoDefine service(String service) {
-        RoDefine.service = service;
+        service = service;
         return this;
     }
 
     public RoDefine sources(String sources) {
-        RoDefine.sources = sources;
+        sources = sources;
         return this;
     }
 
     public RoDefine print(boolean print) {
-        RoDefine.print = print;
+        print = print;
         return this;
     }
 
+    public RoDefine printHeader(boolean header) {
+        header = header;
+        return this;
+    }
 
-    String service() {
+    public RoDefine printBody(boolean body) {
+        body = body;
+        return this;
+    }
+
+    public static String service() {
         return service;
     }
 
-    String sources() {
+    public static String sources() {
         return sources;
     }
 
     boolean print() {
         return print;
+    }
+
+    boolean header() {
+        return header;
+    }
+
+    boolean body() {
+        return body;
     }
 }
