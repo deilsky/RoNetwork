@@ -133,8 +133,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ArrayList<String> paths = new ArrayList<String>();
-                paths.add("/storage/emulated/0/程序/text.zip");
                 paths.add("/storage/emulated/0/程序/text2.zip");
+                paths.add("/storage/emulated/0/程序/text.zip");
                 //无上传进度
                 /*UploadApi.create().upload(paths, new RoResultListener<RoResult<String>>() {
 
@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
                 // 有上传进度
                 ArrayList<String> paths = new ArrayList<String>();
                 paths.add("/storage/emulated/0/程序/text.zip");
-                paths.add("/storage/emulated/0/程序/text2.zip");
+//                paths.add("/storage/emulated/0/程序/text2.zip");
                 UploadApi.create().upload(paths, new RoProgressUpLoadListener<RoResult<ArrayList<String>>>() {
 
                     @Override

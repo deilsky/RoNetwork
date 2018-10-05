@@ -91,8 +91,9 @@ public class UploadApi implements NetContract.UploadContract {
     public void upload(ArrayList<String> paths, Observer<RoResult<ArrayList<String>>> listener) {
         MultipartBody.Builder build = new MultipartBody.Builder();
         build.setType(MultipartBody.FORM);
+        File file = null;
         for (String path : paths) {
-            File file = new File(path);
+            file = new File(path);
             build.addFormDataPart("upload", file.getPath(), RequestBody.create(MediaType.parse("application/zip"), file));
             build.build();
         }
