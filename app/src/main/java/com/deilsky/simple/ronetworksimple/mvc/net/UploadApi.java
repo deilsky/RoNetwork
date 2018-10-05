@@ -40,7 +40,7 @@ public class UploadApi implements NetContract.UploadContract {
     }
 
     @Override
-    public void upload(ArrayList<String> paths, final RoProgressUpLoadListener<RoResult<String>> listener) {
+    public void upload(ArrayList<String> paths, final RoProgressUpLoadListener<RoResult<ArrayList<String>>> listener) {
         MultipartBody.Builder build = new MultipartBody.Builder();
         build.setType(MultipartBody.FORM);
         for (String path : paths) {
@@ -49,15 +49,15 @@ public class UploadApi implements NetContract.UploadContract {
             build.addFormDataPart("upload", file.getPath(), body);
             build.build();
         }
-        Call<RoResult<String>> call = service.upload(build.build().parts());
-        call.enqueue(new Callback<RoResult<String>>() {
+        Call<RoResult<ArrayList<String>>> call = service.upload(build.build().parts());
+        call.enqueue(new Callback<RoResult<ArrayList<String>>>() {
             @Override
-            public void onResponse(Call<RoResult<String>> call, Response<RoResult<String>> response) {
-                new RoResponse<RoResult<String>>().formatter(response, listener);
+            public void onResponse(Call<RoResult<ArrayList<String>>> call, Response<RoResult<ArrayList<String>>> response) {
+                new RoResponse<RoResult<ArrayList<String>>>().formatter(response, listener);
             }
 
             @Override
-            public void onFailure(Call<RoResult<String>> call, Throwable t) {
+            public void onFailure(Call<RoResult<ArrayList<String>>> call, Throwable t) {
                 t.printStackTrace();
                 listener.onError(t.getMessage());
             }
@@ -65,7 +65,7 @@ public class UploadApi implements NetContract.UploadContract {
     }
 
     @Override
-    public void upload(ArrayList<String> paths, final RoResultListener<RoResult<String>> listener) {
+    public void upload(ArrayList<String> paths, final RoResultListener<RoResult<ArrayList<String>>> listener) {
         MultipartBody.Builder build = new MultipartBody.Builder();
         build.setType(MultipartBody.FORM);
         for (String path : paths) {
@@ -73,22 +73,22 @@ public class UploadApi implements NetContract.UploadContract {
             build.addFormDataPart("upload", file.getPath(), RequestBody.create(MediaType.parse("application/zip"), file));
             build.build();
         }
-        Call<RoResult<String>> call = service.upload(build.build().parts());
-        call.enqueue(new Callback<RoResult<String>>() {
+        Call<RoResult<ArrayList<String>>> call = service.upload(build.build().parts());
+        call.enqueue(new Callback<RoResult<ArrayList<String>>>() {
             @Override
-            public void onResponse(Call<RoResult<String>> call, Response<RoResult<String>> response) {
-                new RoResponse<RoResult<String>>().formatter(response, listener);
+            public void onResponse(Call<RoResult<ArrayList<String>>> call, Response<RoResult<ArrayList<String>>> response) {
+                new RoResponse<RoResult<ArrayList<String>>>().formatter(response, listener);
             }
 
             @Override
-            public void onFailure(Call<RoResult<String>> call, Throwable t) {
+            public void onFailure(Call<RoResult<ArrayList<String>>> call, Throwable t) {
                 listener.onError(t.getMessage());
             }
         });
     }
 
     @Override
-    public void upload(ArrayList<String> paths, Observer<RoResult<String>> listener) {
+    public void upload(ArrayList<String> paths, Observer<RoResult<ArrayList<String>>> listener) {
         MultipartBody.Builder build = new MultipartBody.Builder();
         build.setType(MultipartBody.FORM);
         for (String path : paths) {
@@ -96,6 +96,6 @@ public class UploadApi implements NetContract.UploadContract {
             build.addFormDataPart("upload", file.getPath(), RequestBody.create(MediaType.parse("application/zip"), file));
             build.build();
         }
-        new RoObservable<RoResult<String>>().formatter(service.upload1(build.build().parts())).subscribe(listener);
+        new RoObservable<RoResult<ArrayList<String>>>().formatter(service.upload1(build.build().parts())).subscribe(listener);
     }
 }

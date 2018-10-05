@@ -11,7 +11,6 @@ public class RoResult<T> {
     private int code;
     private String msg;
     private Map<String, Object> map;
-    private ArrayList<T> list;
     private T data;
 
     public int getStatus() {
@@ -45,14 +44,6 @@ public class RoResult<T> {
 
     public void setCode(int code) {
         this.code = code;
-    }
-
-    public ArrayList<T> getList() {
-        return list;
-    }
-
-    public void setList(ArrayList<T> list) {
-        this.list = list;
     }
 
     public T getData() {

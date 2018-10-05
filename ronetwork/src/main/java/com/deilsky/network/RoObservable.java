@@ -10,6 +10,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class RoObservable<T> {
+
     public Observable<T> formatter(Observable<T> observable) {
         return observable.subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

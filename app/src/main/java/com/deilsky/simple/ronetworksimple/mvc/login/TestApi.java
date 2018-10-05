@@ -8,6 +8,8 @@ import com.deilsky.network.listener.RoResultListener;
 import com.deilsky.simple.ronetworksimple.mvc.model.Banner;
 import com.deilsky.simple.ronetworksimple.mvc.model.Users;
 
+import java.util.ArrayList;
+
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -35,15 +37,15 @@ public class TestApi implements TestContract {
     }
 
     @Override
-    public void banners(final RoResultListener<RoResult<Banner>> listener) {
-        service.banners().enqueue(new Callback<RoResult<Banner>>() {
+    public void banners(final RoResultListener<RoResult<ArrayList<Banner>>> listener) {
+        service.banners().enqueue(new Callback<RoResult<ArrayList<Banner>>>() {
             @Override
-            public void onResponse(Call<RoResult<Banner>> call, Response<RoResult<Banner>> response) {
-                new RoResponse<RoResult<Banner>>().formatter(response, listener);
+            public void onResponse(Call<RoResult<ArrayList<Banner>>> call, Response<RoResult<ArrayList<Banner>>> response) {
+                new RoResponse<RoResult<ArrayList<Banner>>>().formatter(response, listener);
             }
 
             @Override
-            public void onFailure(Call<RoResult<Banner>> call, Throwable t) {
+            public void onFailure(Call<RoResult<ArrayList<Banner>>> call, Throwable t) {
                 t.printStackTrace();
                 listener.onError(t.getMessage());
             }
@@ -67,7 +69,7 @@ public class TestApi implements TestContract {
     }
 
     @Override
-    public Disposable rxDisposableBanners(Consumer<RoResult<Banner>> listener) {
+    public Disposable rxDisposableBanners(Consumer<RoResult<ArrayList<Banner>>> listener) {
 
         return service.rxBanners().subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -76,8 +78,8 @@ public class TestApi implements TestContract {
     }
 
     @Override
-    public void rxObservableBanners(Observer<RoResult<Banner>> listener) {
-        new RoObservable<RoResult<Banner>>().formatter(service.rxBanners()).subscribe(listener);
+    public void rxObservableBanners(Observer<RoResult<ArrayList<Banner>>> listener) {
+        new RoObservable<RoResult<ArrayList<Banner>>>().formatter(service.rxBanners()).subscribe(listener);
         /*service.rxBanners()
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

@@ -38,12 +38,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                TestApi.create().banners(new RoResultListener<RoResult<Banner>>() {
+                TestApi.create().banners(new RoResultListener<RoResult<ArrayList<Banner>>>() {
                     @Override
-                    public void onSuccess(RoResult<Banner> result) {
+                    public void onSuccess(RoResult<ArrayList<Banner>> result) {
                         Log.d("TAG:", "无RxJava方式");
                         if (200 == result.getStatus()) {
-                            for (Banner banner : result.getList()) {
+                            for (Banner banner : result.getData()) {
                                 Log.d("banners:", banner.getPath());
                             }
                         }
@@ -66,9 +66,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.get2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TestApi.create().rxDisposableBanners(new Consumer<RoResult<Banner>>() {
+                TestApi.create().rxDisposableBanners(new Consumer<RoResult<ArrayList<Banner>>>() {
                     @Override
-                    public void accept(RoResult<Banner> bannerRoResult) throws Exception {
+                    public void accept(RoResult<ArrayList<Banner>> bannerRoResult) throws Exception {
                         Log.d("rxDisposableBanners", "accept");
                     }
                 });
@@ -77,14 +77,14 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.get3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TestApi.create().rxObservableBanners(new Observer<RoResult<Banner>>() {
+                TestApi.create().rxObservableBanners(new Observer<RoResult<ArrayList<Banner>>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         Log.d("rxObservableBanners", "onSubscribe");
                     }
 
                     @Override
-                    public void onNext(RoResult<Banner> bannerRoResult) {
+                    public void onNext(RoResult<ArrayList<Banner>> bannerRoResult) {
                         Log.d("rxObservableBanners", "onNext");
                     }
 
@@ -159,17 +159,17 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 */
-                UploadApi.create().upload(paths, new Observer<RoResult<String>>() {
+                UploadApi.create().upload(paths, new Observer<RoResult<ArrayList<String>>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         Log.d("upload", "onSubscribe");
                     }
 
                     @Override
-                    public void onNext(RoResult<String> stringRoResult) {
+                    public void onNext(RoResult<ArrayList<String>> stringRoResult) {
                         Log.d("upload", "onNext");
                         if (200 == stringRoResult.getStatus()) {
-                            for (String s : stringRoResult.getList()) {
+                            for (String s : stringRoResult.getData()) {
                                 Log.d("upload-onNext", s);
                             }
                         }
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("upload", "onError:"+e.getMessage());
+                        Log.d("upload", "onError:" + e.getMessage());
                     }
 
                     @Override
@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<String> paths = new ArrayList<String>();
                 paths.add("/storage/emulated/0/程序/text.zip");
                 paths.add("/storage/emulated/0/程序/text2.zip");
-                UploadApi.create().upload(paths, new RoProgressUpLoadListener<RoResult<String>>() {
+                UploadApi.create().upload(paths, new RoProgressUpLoadListener<RoResult<ArrayList<String>>>() {
 
                     @Override
                     public void onProgress(long progress, long size, boolean hasFinish) {
@@ -203,10 +203,10 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onSuccess(RoResult<String> result) {
+                    public void onSuccess(RoResult<ArrayList<String>> result) {
                         Log.d("result:", result.toString());
                         if (200 == result.getStatus()) {
-                            for (Object s : result.getList()) {
+                            for (Object s : result.getData()) {
                                 Log.d("path:", s + "");
                             }
                         }
@@ -227,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.download).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*
                 DownLoadApi.create().download("resources/text.zip",
                         new RoResultListener<ResponseBody>() {
 
@@ -246,9 +247,30 @@ public class MainActivity extends AppCompatActivity {
                                 Log.e("download--onError:", msg);
                             }
                         });
+                        */
+                DownLoadApi.create().download("resources/text.zip", new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.d("download", "onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(ResponseBody responseBody) {
+                        Log.d("download", "onNext");
+                        download(responseBody);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("download", "onError");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d("download", "onComplete");
+                    }
+                });
             }
-
-
         });
 
     }

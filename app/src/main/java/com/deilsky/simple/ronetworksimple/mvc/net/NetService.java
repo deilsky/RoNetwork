@@ -24,12 +24,15 @@ import retrofit2.http.Url;
 public interface NetService {
     @Multipart
     @POST("users/upload")
-    Call<RoResult<String>> upload(@Part List<MultipartBody.Part> file);
+    Call<RoResult<ArrayList<String>>> upload(@Part List<MultipartBody.Part> file);
 
     @Multipart
     @POST("users/upload")
-    Observable<RoResult<String>> upload1(@Part List<MultipartBody.Part> file);
+    Observable<RoResult<ArrayList<String>>> upload1(@Part List<MultipartBody.Part> file);
 
     @GET
     Call<ResponseBody> download(@Url String path);
+
+    @GET
+    Observable<ResponseBody> download1(@Url String path);
 }

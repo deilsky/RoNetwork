@@ -1,10 +1,13 @@
 package com.deilsky.simple.ronetworksimple.mvc.net;
 
 
+import com.deilsky.network.RoObservable;
 import com.deilsky.network.RoResponse;
+import com.deilsky.network.RoResult;
 import com.deilsky.network.RoRetrofit;
 import com.deilsky.network.listener.RoResultListener;
 
+import io.reactivex.Observer;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,5 +45,10 @@ public class DownLoadApi implements NetContract.DownLoadContract {
                 listener.onError(t.getMessage());
             }
         });
+    }
+
+    @Override
+    public void download(String path, Observer<ResponseBody> listener) {
+        new RoObservable<ResponseBody>().formatter(service.download1(path)).subscribe(listener);
     }
 }
