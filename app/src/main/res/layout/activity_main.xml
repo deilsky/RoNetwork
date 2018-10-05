@@ -9,12 +9,28 @@
     tools:context="com.deilsky.simple.ronetworksimple.MainActivity">
 
     <TextView
-        android:id="@+id/get"
+        android:id="@+id/get1"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:text="GET" />
+        android:text="无RxJava方式GET" />
+
+    <TextView
+        android:id="@+id/get2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="Consumer方式GET" />
+
+    <TextView
+        android:id="@+id/get3"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="RxJava方式GET" />
 
     <TextView
         android:id="@+id/post"
@@ -51,6 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:max="100" />
+
     <TextView
         android:id="@+id/download"
         android:layout_width="match_parent"

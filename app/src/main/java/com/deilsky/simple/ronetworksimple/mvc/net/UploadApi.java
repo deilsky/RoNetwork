@@ -1,16 +1,20 @@
 package com.deilsky.simple.ronetworksimple.mvc.net;
 
 
+import com.deilsky.network.RoObservable;
 import com.deilsky.network.RoRequestBody;
 import com.deilsky.network.RoResponse;
 import com.deilsky.network.RoResult;
 import com.deilsky.network.RoRetrofit;
 import com.deilsky.network.listener.RoProgressUpLoadListener;
 import com.deilsky.network.listener.RoResultListener;
+import com.deilsky.simple.ronetworksimple.mvc.model.Banner;
 
 import java.io.File;
 import java.util.ArrayList;
 
+import io.reactivex.Observable;
+import io.reactivex.Observer;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -81,5 +85,17 @@ public class UploadApi implements NetContract.UploadContract {
                 listener.onError(t.getMessage());
             }
         });
+    }
+
+    @Override
+    public void upload(ArrayList<String> paths, Observer<RoResult<String>> listener) {
+        MultipartBody.Builder build = new MultipartBody.Builder();
+        build.setType(MultipartBody.FORM);
+        for (String path : paths) {
+            File file = new File(path);
+            build.addFormDataPart("upload", file.getPath(), RequestBody.create(MediaType.parse("application/zip"), file));
+            build.build();
+        }
+        new RoObservable<RoResult<String>>().formatter(service.upload1(build.build().parts())).subscribe(listener);
     }
 }

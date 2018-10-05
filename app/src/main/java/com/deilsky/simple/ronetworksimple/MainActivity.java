@@ -20,6 +20,9 @@ import com.deilsky.simple.ronetworksimple.mvc.net.UploadApi;
 
 import java.util.ArrayList;
 
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import okhttp3.ResponseBody;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,13 +34,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         progressBar1 = findViewById(R.id.progressBar1);
         progressBar2 = findViewById(R.id.progressBar2);
-        findViewById(R.id.get).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.get1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 TestApi.create().banners(new RoResultListener<RoResult<Banner>>() {
                     @Override
                     public void onSuccess(RoResult<Banner> result) {
+                        Log.d("TAG:", "无RxJava方式");
                         if (200 == result.getStatus()) {
                             for (Banner banner : result.getList()) {
                                 Log.d("banners:", banner.getPath());
@@ -53,6 +57,45 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onError(String msg) {
                         alert(msg);
+                    }
+                });
+
+
+            }
+        });
+        findViewById(R.id.get2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TestApi.create().rxDisposableBanners(new Consumer<RoResult<Banner>>() {
+                    @Override
+                    public void accept(RoResult<Banner> bannerRoResult) throws Exception {
+                        Log.d("rxDisposableBanners", "accept");
+                    }
+                });
+            }
+        });
+        findViewById(R.id.get3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TestApi.create().rxObservableBanners(new Observer<RoResult<Banner>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.d("rxObservableBanners", "onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(RoResult<Banner> bannerRoResult) {
+                        Log.d("rxObservableBanners", "onNext");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("rxObservableBanners", "onError");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d("rxObservableBanners", "onComplete");
                     }
                 });
             }
@@ -90,10 +133,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ArrayList<String> paths = new ArrayList<String>();
-                paths.add("/storage/emulated/0/程序/Cclocation.zip");
-                paths.add("/storage/emulated/0/snapshot/20170724120021495.jpeg");
+                paths.add("/storage/emulated/0/程序/text.zip");
+                paths.add("/storage/emulated/0/程序/text2.zip");
                 //无上传进度
-                UploadApi.create().upload(paths, new RoResultListener<RoResult<String>>() {
+                /*UploadApi.create().upload(paths, new RoResultListener<RoResult<String>>() {
 
                     @Override
                     public void onSuccess(RoResult<String> result) {
@@ -113,6 +156,33 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onError(String msg) {
                         Log.e("onError", msg);
+                    }
+                });
+                */
+                UploadApi.create().upload(paths, new Observer<RoResult<String>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.d("upload", "onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(RoResult<String> stringRoResult) {
+                        Log.d("upload", "onNext");
+                        if (200 == stringRoResult.getStatus()) {
+                            for (String s : stringRoResult.getList()) {
+                                Log.d("upload-onNext", s);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("upload", "onError:"+e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d("upload", "onComplete");
                     }
                 });
 
@@ -163,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(ResponseBody result) {
                                 Log.d("download", result.toString());
-                                    download(result);
+                                download(result);
                             }
 
                             @Override

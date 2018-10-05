@@ -7,6 +7,7 @@ import com.deilsky.network.listener.RoResultListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -24,6 +25,10 @@ public interface NetService {
     @Multipart
     @POST("users/upload")
     Call<RoResult<String>> upload(@Part List<MultipartBody.Part> file);
+
+    @Multipart
+    @POST("users/upload")
+    Observable<RoResult<String>> upload1(@Part List<MultipartBody.Part> file);
 
     @GET
     Call<ResponseBody> download(@Url String path);

@@ -4,6 +4,7 @@ import com.deilsky.network.RoResult;
 import com.deilsky.simple.ronetworksimple.mvc.model.Banner;
 import com.deilsky.simple.ronetworksimple.mvc.model.Users;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -19,4 +20,7 @@ public interface TestService {
 
     @POST("users/login")
     Call<RoResult<Users>> login(@Body Users users);
+
+    @GET("banner/banners")
+    Observable<RoResult<Banner>> rxBanners();
 }

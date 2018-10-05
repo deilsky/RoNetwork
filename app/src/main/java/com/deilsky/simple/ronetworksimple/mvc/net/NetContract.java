@@ -6,6 +6,8 @@ import com.deilsky.network.listener.RoProgressUpLoadListener;
 
 import java.util.ArrayList;
 
+import io.reactivex.Observable;
+import io.reactivex.Observer;
 import okhttp3.ResponseBody;
 
 /**
@@ -16,6 +18,7 @@ public interface NetContract {
     interface UploadContract {
         void upload(ArrayList<String> paths, RoProgressUpLoadListener<RoResult<String>> listener);
         void upload(ArrayList<String> paths, RoResultListener<RoResult<String>> listener);
+        void upload(ArrayList<String> paths, Observer<RoResult<String>> listener);
     }
     interface DownLoadContract {
         void download(String path, RoResultListener<ResponseBody> listener);

@@ -1,5 +1,6 @@
 package com.deilsky.simple.ronetworksimple.mvc.login;
 
+import com.deilsky.network.RoObservable;
 import com.deilsky.network.RoResponse;
 import com.deilsky.network.RoResult;
 import com.deilsky.network.RoRetrofit;
@@ -7,6 +8,11 @@ import com.deilsky.network.listener.RoResultListener;
 import com.deilsky.simple.ronetworksimple.mvc.model.Banner;
 import com.deilsky.simple.ronetworksimple.mvc.model.Users;
 
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -49,7 +55,7 @@ public class TestApi implements TestContract {
         service.login(model).enqueue(new Callback<RoResult<Users>>() {
             @Override
             public void onResponse(Call<RoResult<Users>> call, Response<RoResult<Users>> response) {
-                new RoResponse<RoResult<Users>>().formatter(response,listener);
+                new RoResponse<RoResult<Users>>().formatter(response, listener);
             }
 
             @Override
@@ -58,5 +64,24 @@ public class TestApi implements TestContract {
                 listener.onError(t.getMessage());
             }
         });
+    }
+
+    @Override
+    public Disposable rxDisposableBanners(Consumer<RoResult<Banner>> listener) {
+
+        return service.rxBanners().subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(listener);
+
+    }
+
+    @Override
+    public void rxObservableBanners(Observer<RoResult<Banner>> listener) {
+        new RoObservable<RoResult<Banner>>().formatter(service.rxBanners()).subscribe(listener);
+        /*service.rxBanners()
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(listener);*/
     }
 }
