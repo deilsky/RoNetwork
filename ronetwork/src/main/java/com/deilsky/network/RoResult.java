@@ -1,25 +1,12 @@
 package com.deilsky.network;
 
-import java.util.ArrayList;
-import java.util.Map;
-
 /**
  * Created by 帷幕 on 2017/10/9.
  */
 public class RoResult<T> {
-    private int status;
     private int code;
     private String msg;
-    private Map<String, Object> map;
     private T data;
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
 
     public String getMsg() {
         return msg;
@@ -27,15 +14,6 @@ public class RoResult<T> {
 
     public void setMsg(String msg) {
         this.msg = msg;
-    }
-
-
-    public Map<String, Object> getMap() {
-        return map;
-    }
-
-    public void setMap(Map<String, Object> map) {
-        this.map = map;
     }
 
     public int getCode() {
